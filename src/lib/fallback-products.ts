@@ -1,0 +1,377 @@
+import rose from "@/assets/p-rose.jpg";
+import oud from "@/assets/p-oud.jpg";
+import citrus from "@/assets/p-citrus.jpg";
+import oriental from "@/assets/p-oriental.jpg";
+import jasmin from "@/assets/p-jasmin.jpg";
+import boise from "@/assets/p-boise.jpg";
+import diffBoisVerre from "@/assets/p-diff-bois-verre.png";
+import diffCeramique from "@/assets/p-diff-ceramique.png";
+import duranceSet from "@/assets/p-durance-set.png";
+import diffBergerLolita from "@/assets/p-diff-berger-lolita.png";
+import diffFlamme from "@/assets/p-diff-flamme.png";
+import diffLedBois from "@/assets/p-diff-led-bois.png";
+import diffMystefy from "@/assets/p-diff-mystefy.png";
+import humiMiniRgb from "@/assets/p-humi-mini-rgb.png";
+import coffretBergerBois from "@/assets/p-coffret-berger-bois.png";
+import humiLed from "@/assets/p-humi-led.png";
+import diffVintage from "@/assets/p-diff-vintage.png";
+import diffZen from "@/assets/p-diff-zen.png";
+import humiH2o from "@/assets/p-humi-h2o.png";
+import type { Product } from "./products";
+
+export const fallbackProducts: Product[] = [
+  {
+    ref: "SAL-ROSE-001",
+    name: "Rose d'Orient",
+    type: "Parfum",
+    family: "Floral",
+    price: 45000,
+    image: rose,
+    short: "Un bouquet floral lumineux, signature de la maison.",
+    description:
+      "Rose d'Orient célèbre la rose dans toute sa splendeur. Une composition raffinée où la rose de Damas s'entrelace avec la pivoine et le litchi pour une signature résolument féminine et intemporelle.",
+    notes: {
+      top: ["Litchi", "Bergamote"],
+      heart: ["Rose de Damas", "Pivoine"],
+      base: ["Musc blanc", "Ambre"],
+    },
+    contenance: "100 ml",
+    concentration: "Eau de Parfum",
+    available: true,
+    featured: true,
+  },
+  {
+    ref: "SAL-OUD-002",
+    name: "Oud Royal",
+    type: "Parfum",
+    family: "Oriental",
+    price: 85000,
+    image: oud,
+    short: "L'oud précieux, sublimé par l'ambre et le safran.",
+    description:
+      "Une fragrance d'exception inspirée des palais d'Orient. L'oud rare se mêle à l'ambre chaud et au safran pour une signature opulente, profonde et inoubliable.",
+    notes: {
+      top: ["Safran", "Poivre rose"],
+      heart: ["Oud", "Rose turque"],
+      base: ["Ambre", "Bois de santal"],
+    },
+    contenance: "100 ml",
+    concentration: "Extrait de Parfum",
+    available: true,
+    featured: true,
+  },
+  {
+    ref: "SAL-CIT-003",
+    name: "Éclat d'Agrumes",
+    type: "Parfum",
+    family: "Frais",
+    price: 38000,
+    image: citrus,
+    short: "La fraîcheur pétillante des hespéridés du Sud.",
+    description:
+      "Éclat d'Agrumes capture l'énergie d'un matin ensoleillé. Bergamote, citron de Sicile et néroli composent une fragrance vive, lumineuse et résolument estivale.",
+    notes: {
+      top: ["Bergamote", "Citron de Sicile"],
+      heart: ["Néroli", "Menthe"],
+      base: ["Vétiver", "Musc"],
+    },
+    contenance: "100 ml",
+    concentration: "Eau de Toilette",
+    available: true,
+    featured: true,
+  },
+  {
+    ref: "SAL-ORI-004",
+    name: "Nuit de Vanille",
+    type: "Parfum",
+    family: "Oriental",
+    price: 52000,
+    image: oriental,
+    short: "Une caresse vanillée, épicée et envoûtante.",
+    description:
+      "Nuit de Vanille enveloppe la peau d'un sillage gourmand. La vanille de Madagascar s'allie à la cannelle et au benjoin pour une fragrance sensuelle, idéale pour les soirées d'exception.",
+    notes: {
+      top: ["Cardamome", "Cannelle"],
+      heart: ["Vanille de Madagascar", "Fève tonka"],
+      base: ["Benjoin", "Patchouli"],
+    },
+    contenance: "100 ml",
+    concentration: "Eau de Parfum",
+    available: true,
+  },
+  {
+    ref: "SAL-FLO-005",
+    name: "Jasmin Sauvage",
+    type: "Parfum",
+    family: "Floral",
+    price: 42000,
+    image: jasmin,
+    short: "Le jasmin nocturne, délicat et hypnotique.",
+    description:
+      "Jasmin Sauvage révèle toute la sensualité d'une fleur cueillie à l'aube. Une composition aérienne où le jasmin se mêle à la fleur d'oranger pour un sillage romantique.",
+    notes: {
+      top: ["Mandarine", "Poire"],
+      heart: ["Jasmin Sambac", "Fleur d'oranger"],
+      base: ["Musc", "Bois blancs"],
+    },
+    contenance: "100 ml",
+    concentration: "Eau de Parfum",
+    available: true,
+  },
+  {
+    ref: "SAL-BOI-006",
+    name: "Forêt Émeraude",
+    type: "Parfum",
+    family: "Boisé",
+    price: 58000,
+    image: boise,
+    short: "Un boisé profond, vétiver et cèdre noble.",
+    description:
+      "Forêt Émeraude évoque la profondeur d'une forêt à l'aube. Cèdre, vétiver et mousse de chêne composent une signature masculine, élégante et terrienne.",
+    notes: {
+      top: ["Bergamote", "Genièvre"],
+      heart: ["Cèdre", "Cyprès"],
+      base: ["Vétiver", "Mousse de chêne"],
+    },
+    contenance: "100 ml",
+    concentration: "Eau de Parfum",
+    available: true,
+  },
+  {
+    ref: "SAL-DIF-008",
+    name: "Diffuseur Bois & Verre Dépoli",
+    type: "Diffuseur électrique",
+    price: 25000,
+    image: diffBoisVerre,
+    short: "Base en bois naturel et dôme lumineux, élégance zen.",
+    description:
+      "Alliant une base en bois naturel et un dôme en verre dépoli, ce diffuseur diffuse une brume apaisante tout en servant de lampe d'ambiance chaleureuse. Minuteries 30 min, 2 h et 4 h pour un confort personnalisé.",
+    notes: {
+      top: ["Base bois naturel", "Dôme verre dépoli", "Bouton doré"],
+      heart: ["Minuteries 30 min / 2 h / 4 h", "LED d'ambiance", "Ultrasons silencieux"],
+      base: ["Aromathérapie", "Salon", "Chambre"],
+    },
+    contenance: "300 ml",
+    concentration: "Diffuseur ultrasonique",
+    available: true,
+  },
+  {
+    ref: "SAL-DIF-009",
+    name: "Diffuseur Céramique Motif Floral",
+    type: "Diffuseur électrique",
+    price: 20000,
+    image: diffCeramique,
+    short: "Découpes florales et lumière chaleureuse pour la détente.",
+    description:
+      "Ce diffuseur en céramique blanche aux découpes florales délicates projette une lumière d'ambiance chaleureuse. Sa base en bois naturel et ses minuteries (30 min à 3 h+) en font un compagnon idéal pour l'aromathérapie.",
+    notes: {
+      top: ["Céramique ajourée", "Motifs floraux", "Base bois naturel"],
+      heart: ["Minuteries multiples", "Brume ultrasonique", "LED intégrée"],
+      base: ["Coin lecture", "Chambre", "Bureau"],
+    },
+    contenance: "300 ml",
+    concentration: "Diffuseur ultrasonique",
+    available: true,
+  },
+  {
+    ref: "SAL-DIF-010",
+    name: "Diffuseur Ultrasonique Durance Étoilé",
+    type: "Diffuseur électrique",
+    price: 39500,
+    image: duranceSet,
+    short: "Céramique perforée et lumière étoilée, marque Durance.",
+    description:
+      "Diffuseur en céramique crème à motif étoilé avec base en bois. La lumière chaude traverse les perforations pour une ambiance feutrée, tandis que la brume ultrasonique parfume délicatement votre intérieur. Recharge Concentré de Parfum Durance Fleur d'Oranger disponible séparément (8 500 FCFA).",
+    notes: {
+      top: ["Céramique Durance", "Motif perforé lumineux", "Base bois noble"],
+      heart: ["Diffusion ultrasonique", "Éclairage d'ambiance", "Design français"],
+      base: ["Salon", "Entrée", "Suite parentale"],
+    },
+    contenance: "200 ml",
+    concentration: "Diffuseur ultrasonique",
+    available: true,
+    featured: true,
+  },
+  {
+    ref: "SAL-DIF-012",
+    name: "Diffuseur Maison Berger × Lolita Lempicka",
+    type: "Diffuseur électrique",
+    price: 62000,
+    image: diffBergerLolita,
+    short: "Collaboration exclusive, design noir et lierre illuminé.",
+    description:
+      "Né de la collaboration entre Maison Berger Paris et Lolita Lempicka, ce diffuseur de brume électrique revêt un noir profond orné de feuilles de lierre illuminées. Son couvercle métallique travaillé en fait un objet de décoration d'exception.",
+    notes: {
+      top: ["Maison Berger Paris", "Design Lolita Lempicka", "Finition noire glossy"],
+      heart: ["Diffusion électrique de brume", "Motifs lierre lumineux", "Couvercle métal rose-gold"],
+      base: ["Salon de réception", "Chambre", "Cadeau prestige"],
+    },
+    contenance: "500 ml",
+    concentration: "Diffuseur électrique",
+    available: true,
+    featured: true,
+  },
+  {
+    ref: "SAL-DIF-015",
+    name: "Diffuseur Effet Flamme",
+    type: "Diffuseur électrique",
+    price: 15000,
+    image: diffFlamme,
+    short: "Effet flamme réaliste et brume parfumée.",
+    description:
+      "Ce diffuseur combine aromathérapie et spectacle visuel : la brume ultrasonique est illuminée par une LED chaude pour un effet flamme saisissant. Base blanche, dôme fumé et anneau doré pour un look premium.",
+    notes: {
+      top: ["Effet flamme LED", "Dôme fumé", "Anneau doré"],
+      heart: ["Ultrasons silencieux", "Huiles essentielles", "Design conique"],
+      base: ["Soirée", "Salon", "Ambiance cocooning"],
+    },
+    contenance: "150 ml",
+    concentration: "Diffuseur ultrasonique",
+    available: true,
+  },
+  {
+    ref: "SAL-DIF-016",
+    name: "Diffuseur LED Bois Naturel",
+    type: "Diffuseur électrique",
+    price: 18500,
+    image: diffLedBois,
+    short: "Finition bois et lumières changeantes apaisantes.",
+    description:
+      "Diffuseur ultrasonique au design naturel : base effet bois et dôme translucide aux LED multicolores. Purifie l'air, diffuse vos senteurs préférées et crée une ambiance relaxante dans toute pièce.",
+    notes: {
+      top: ["Finition bois naturel", "LED 7 couleurs", "Forme goutte"],
+      heart: ["300 ml de capacité", "Arrêt automatique", "3 boutons de contrôle"],
+      base: ["Bureau", "Chambre", "Salon"],
+    },
+    contenance: "300 ml",
+    concentration: "Diffuseur ultrasonique",
+    available: true,
+  },
+  {
+    ref: "SAL-DIF-017",
+    name: "Diffuseur My Stefy Home Fragrance",
+    type: "Diffuseur électrique",
+    price: 35000,
+    image: diffMystefy,
+    short: "Design cylindrique noir mat, diffusion constante.",
+    description:
+      "Le diffuseur My Stefy allie élégance minimaliste et performance. Son corps cylindrique noir mat s'intègre dans tout décor contemporain et assure une diffusion optimale de vos parfums d'ambiance.",
+    notes: {
+      top: ["Noir mat premium", "Logo lotus doré", "Design épuré"],
+      heart: ["Diffusion constante", "Base stable", "Silencieux"],
+      base: ["Salon", "Bureau", "Chambre"],
+    },
+    contenance: "400 ml",
+    concentration: "Diffuseur d'ambiance",
+    available: true,
+  },
+  {
+    ref: "SAL-HUM-018",
+    name: "Mini Humidificateur LED",
+    type: "Diffuseur électrique",
+    price: 6500,
+    image: humiMiniRgb,
+    short: "Compact, LED arc-en-ciel — disponible en rose, blanc ou noir.",
+    description:
+      "Mini humidificateur portable au design cylindrique. Anneau LED multicolore et brume fine pour un air plus agréable. Disponible en trois finitions : rose poudré, blanc épuré ou noir élégant. Idéal sur un bureau, une table de chevet ou en voiture via USB. Précisez la couleur souhaitée lors de votre commande WhatsApp.",
+    notes: {
+      top: ["3 coloris : rose, blanc, noir", "LED RGB", "Format compact"],
+      heart: ["Brume ultrasonique", "USB", "Fonctionnement silencieux"],
+      base: ["Bureau", "Voiture", "Table de chevet"],
+    },
+    contenance: "260 ml",
+    concentration: "Humidificateur portable",
+    available: true,
+  },
+  {
+    ref: "SAL-COF-021",
+    name: "Coffret Maison Berger — Bois Sauvage",
+    type: "Diffuseur électrique",
+    price: 55000,
+    image: coffretBergerBois,
+    short: "Diffuseur noir, recharge 475 ml et télécommande.",
+    description:
+      "Coffret prestige Maison Berger Paris : diffuseur électrique noir à motif losange lumineux, flacon de parfum de maison Bois Sauvage (475 ml) et télécommande. Une solution complète pour parfumer votre intérieur avec raffinement.",
+    notes: {
+      top: ["Maison Berger Paris", "Parfum Bois Sauvage", "Télécommande incluse"],
+      heart: ["475 ml de recharge", "Motif losange LED", "Diffusion électrique"],
+      base: ["Salon", "Entrée", "Cadeau haut de gamme"],
+    },
+    contenance: "475 ml",
+    concentration: "Coffret diffuseur",
+    available: true,
+    featured: true,
+  },
+  {
+    ref: "SAL-HUM-022",
+    name: "Mini Humidificateur LED 7 Couleurs",
+    type: "Diffuseur électrique",
+    price: 6000,
+    image: humiLed,
+    short: "Capsule compacte, 7 modes lumineux.",
+    description:
+      "Humidificateur capsule ultra-compact avec dôme translucide et 7 couleurs LED changeantes. Parfait pour un bureau, une table de chevet ou un espace restreint. Alimentation USB.",
+    notes: {
+      top: ["7 couleurs LED", "Dôme translucide", "Gris anthracite"],
+      heart: ["Brume ultrasonique", "USB", "Silencieux"],
+      base: ["Bureau", "Voiture", "Table de nuit"],
+    },
+    contenance: "200 ml",
+    concentration: "Humidificateur portable",
+    available: true,
+  },
+  {
+    ref: "SAL-DIF-023",
+    name: "Diffuseur Vintage Verre Cannelé",
+    type: "Diffuseur électrique",
+    price: 18000,
+    image: diffVintage,
+    short: "Verre cannelé, ruban délicat et lumière ambrée.",
+    description:
+      "Diffuseur d'inspiration vintage en verre cannelé, agrémenté d'un ruban décoratif. Sa lumière ambrée et sa brume fine en font un objet de décoration autant qu'un appareil de bien-être.",
+    notes: {
+      top: ["Verre cannelé", "Ruban décoratif", "Lumière ambrée"],
+      heart: ["Ultrasons", "Arrêt automatique", "Design rétro"],
+      base: ["Chambre", "Salon", "Espace cocooning"],
+    },
+    contenance: "120 ml",
+    concentration: "Diffuseur ultrasonique",
+    available: true,
+  },
+  {
+    ref: "SAL-DIF-024",
+    name: "Diffuseur Zen Mesh Bois & Métal",
+    type: "Diffuseur électrique",
+    price: 22500,
+    image: diffZen,
+    short: "Grille métal perforée et bois naturel, effet étoilé.",
+    description:
+      "Alliant bois naturel et grille métallique noire perforée, ce diffuseur Zen diffuse une brume légère tout en projetant un effet lumineux étoilé. Un objet design pour l'aromathérapie et la décoration.",
+    notes: {
+      top: ["Bois + métal mesh", "LED blanche", "Design zen"],
+      heart: ["150 ml", "Ultrasons silencieux", "Arrêt automatique"],
+      base: ["Bureau", "Salon", "Coin méditation"],
+    },
+    contenance: "150 ml",
+    concentration: "Diffuseur ultrasonique",
+    available: true,
+  },
+  {
+    ref: "SAL-HUM-025",
+    name: "Humidificateur H2O",
+    type: "Diffuseur électrique",
+    price: 8500,
+    image: humiH2o,
+    short: "Brume fraîche et LED multicolore — rose, blanc ou gris.",
+    description:
+      "Humidificateur portable H2O au design cylindrique minimaliste. Anneau LED dégradé et brume fraîche pour améliorer le confort de l'air. Proposé en rose pastel, blanc classique ou gris anthracite. Compact, silencieux et alimenté par USB. Indiquez votre couleur préférée lors de la commande.",
+    notes: {
+      top: ["3 coloris : rose, blanc, gris", "Marque H2O", "LED multicolore"],
+      heart: ["Brume fraîche", "USB", "Silencieux"],
+      base: ["Bureau", "Voiture", "Chambre"],
+    },
+    contenance: "300 ml",
+    concentration: "Humidificateur portable",
+    available: true,
+  },
+];
