@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Star } from "lucide-react";
-import { productDisplayBadge } from "@/lib/catalog";
 import { formatFCFA, type Product } from "@/lib/products";
 import { OrderWhatsAppButton } from "@/components/site/OrderWhatsAppButton";
 import { resolveMediaUrl } from "@/services/api";
