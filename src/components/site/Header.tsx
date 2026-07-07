@@ -42,7 +42,10 @@ export function Header() {
               className="inline-flex items-center gap-1 text-foreground/70 hover:text-primary py-1"
               aria-expanded={catalogOpen}
             >
-              Catalogue <ChevronDown className={cn("h-4 w-4 transition-transform", catalogOpen && "rotate-180")} />
+              Catalogue{" "}
+              <ChevronDown
+                className={cn("h-4 w-4 transition-transform", catalogOpen && "rotate-180")}
+              />
             </button>
             {catalogOpen && (
               <div className="absolute left-0 top-full pt-2 min-w-[15rem]">
@@ -105,11 +108,21 @@ export function Header() {
       {open && (
         <div className="md:hidden border-t border-border bg-background">
           <div className="container-x py-4 flex flex-col gap-1">
-            <Link to="/" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2.5 hover:bg-muted">
+            <Link
+              to="/"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2.5 hover:bg-muted"
+            >
               Accueil
             </Link>
-            <p className="px-3 pt-2 pb-1 text-[10px] uppercase tracking-widest text-muted-foreground">Catalogue</p>
-            <Link to="/catalogue" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2.5 hover:bg-muted pl-5">
+            <p className="px-3 pt-2 pb-1 text-[10px] uppercase tracking-widest text-muted-foreground">
+              Catalogue
+            </p>
+            <Link
+              to="/catalogue"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-2.5 hover:bg-muted pl-5"
+            >
               Tout le catalogue
             </Link>
             {catalogCategories.map((cat) => (
@@ -124,7 +137,12 @@ export function Header() {
               </Link>
             ))}
             {nav.slice(1).map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="rounded-lg px-3 py-2.5 hover:bg-muted">
+              <Link
+                key={n.to}
+                to={n.to}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-2.5 hover:bg-muted"
+              >
                 {n.label}
               </Link>
             ))}

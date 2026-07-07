@@ -45,7 +45,13 @@ export function ProductForm({ initial, submitLabel, onSubmit }: ProductFormProps
   function setNotes(key: keyof ProductFormState["notes"], value: string) {
     setForm((f) => ({
       ...f,
-      notes: { ...f.notes, [key]: value.split(",").map((s) => s.trim()).filter(Boolean) },
+      notes: {
+        ...f.notes,
+        [key]: value
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean),
+      },
     }));
   }
 
@@ -76,8 +82,13 @@ export function ProductForm({ initial, submitLabel, onSubmit }: ProductFormProps
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 rounded-2xl border border-border bg-card p-6">
-      {error && <p className="rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">{error}</p>}
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 rounded-2xl border border-border bg-card p-6"
+    >
+      {error && (
+        <p className="rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">{error}</p>
+      )}
 
       <div className="grid gap-4 md:grid-cols-2">
         <Field label="Référence *">
@@ -90,7 +101,12 @@ export function ProductForm({ initial, submitLabel, onSubmit }: ProductFormProps
           />
         </Field>
         <Field label="Nom *">
-          <input required value={form.name} onChange={(e) => setField("name", e.target.value)} className="field-input" />
+          <input
+            required
+            value={form.name}
+            onChange={(e) => setField("name", e.target.value)}
+            className="field-input"
+          />
         </Field>
         <Field label="Catégorie *">
           <select
@@ -109,7 +125,9 @@ export function ProductForm({ initial, submitLabel, onSubmit }: ProductFormProps
           <Field label="Famille olfactive *">
             <select
               value={form.family ?? "Floral"}
-              onChange={(e) => setField("family", e.target.value as (typeof perfumeFamilies)[number])}
+              onChange={(e) =>
+                setField("family", e.target.value as (typeof perfumeFamilies)[number])
+              }
               className="field-input"
             >
               {perfumeFamilies.map((f) => (
@@ -131,10 +149,20 @@ export function ProductForm({ initial, submitLabel, onSubmit }: ProductFormProps
           />
         </Field>
         <Field label="Contenance *">
-          <input required value={form.contenance} onChange={(e) => setField("contenance", e.target.value)} className="field-input" />
+          <input
+            required
+            value={form.contenance}
+            onChange={(e) => setField("contenance", e.target.value)}
+            className="field-input"
+          />
         </Field>
         <Field label="Concentration / Type *">
-          <input required value={form.concentration} onChange={(e) => setField("concentration", e.target.value)} className="field-input" />
+          <input
+            required
+            value={form.concentration}
+            onChange={(e) => setField("concentration", e.target.value)}
+            className="field-input"
+          />
         </Field>
       </div>
 
@@ -148,7 +176,11 @@ export function ProductForm({ initial, submitLabel, onSubmit }: ProductFormProps
             placeholder="/uploads/products/..."
           />
           <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2 text-sm hover:bg-muted">
-            {uploading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+            {uploading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Upload className="h-4 w-4" />
+            )}
             Uploader
             <input
               type="file"
@@ -162,36 +194,73 @@ export function ProductForm({ initial, submitLabel, onSubmit }: ProductFormProps
           </label>
         </div>
         {form.image && (
-          <img src={resolveMediaUrl(form.image)} alt="" className="mt-2 h-24 w-24 rounded-lg border object-cover" />
+          <img
+            src={resolveMediaUrl(form.image)}
+            alt=""
+            className="mt-2 h-24 w-24 rounded-lg border object-cover"
+          />
         )}
       </Field>
 
       <Field label="Description courte *">
-        <textarea required rows={2} value={form.short} onChange={(e) => setField("short", e.target.value)} className="field-input" />
+        <textarea
+          required
+          rows={2}
+          value={form.short}
+          onChange={(e) => setField("short", e.target.value)}
+          className="field-input"
+        />
       </Field>
       <Field label="Description complète *">
-        <textarea required rows={5} value={form.description} onChange={(e) => setField("description", e.target.value)} className="field-input" />
+        <textarea
+          required
+          rows={5}
+          value={form.description}
+          onChange={(e) => setField("description", e.target.value)}
+          className="field-input"
+        />
       </Field>
 
       <div className="grid gap-4 md:grid-cols-3">
         <Field label={isParfum ? "Notes de tête" : "Points forts"}>
-          <input value={form.notes.top.join(", ")} onChange={(e) => setNotes("top", e.target.value)} className="field-input" placeholder="Séparées par des virgules" />
+          <input
+            value={form.notes.top.join(", ")}
+            onChange={(e) => setNotes("top", e.target.value)}
+            className="field-input"
+            placeholder="Séparées par des virgules"
+          />
         </Field>
         <Field label={isParfum ? "Notes de cœur" : "Fonctionnalités"}>
-          <input value={form.notes.heart.join(", ")} onChange={(e) => setNotes("heart", e.target.value)} className="field-input" />
+          <input
+            value={form.notes.heart.join(", ")}
+            onChange={(e) => setNotes("heart", e.target.value)}
+            className="field-input"
+          />
         </Field>
         <Field label={isParfum ? "Notes de fond" : "Idéal pour"}>
-          <input value={form.notes.base.join(", ")} onChange={(e) => setNotes("base", e.target.value)} className="field-input" />
+          <input
+            value={form.notes.base.join(", ")}
+            onChange={(e) => setNotes("base", e.target.value)}
+            className="field-input"
+          />
         </Field>
       </div>
 
       <div className="flex flex-wrap gap-6">
         <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" checked={form.available} onChange={(e) => setField("available", e.target.checked)} />
+          <input
+            type="checkbox"
+            checked={form.available}
+            onChange={(e) => setField("available", e.target.checked)}
+          />
           Disponible
         </label>
         <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" checked={form.featured} onChange={(e) => setField("featured", e.target.checked)} />
+          <input
+            type="checkbox"
+            checked={form.featured}
+            onChange={(e) => setField("featured", e.target.checked)}
+          />
           Produit phare (accueil)
         </label>
       </div>

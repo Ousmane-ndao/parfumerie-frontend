@@ -5,10 +5,7 @@ import { useMemo, useState } from "react";
 import { Search, Package, X, MessageCircle } from "lucide-react";
 import type { Product, ProductType, PerfumeFamily } from "@/lib/products";
 import { perfumeFamilies, countProductsByType } from "@/lib/products";
-import {
-  catalogCategories,
-  type CatalogCategoryConfig,
-} from "@/lib/catalog";
+import { catalogCategories, type CatalogCategoryConfig } from "@/lib/catalog";
 import { ProductCard, SectionHeader } from "@/components/site/ProductCard";
 import { CategoryPageHeader } from "@/components/catalog/CategoryPageHeader";
 import { EmptyCategoryPanel } from "@/components/catalog/EmptyCategoryPanel";
@@ -87,8 +84,12 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
       ) : (
         <section className="page-hero-gradient border-b border-border/60">
           <div className="container-x py-5 md:py-6">
-            <p className="text-xs uppercase tracking-[0.2em] text-rose-deep font-medium">Collection</p>
-            <h1 className="mt-1 font-display text-3xl md:text-4xl text-primary leading-tight">{pageTitle}</h1>
+            <p className="text-xs uppercase tracking-[0.2em] text-rose-deep font-medium">
+              Collection
+            </p>
+            <h1 className="mt-1 font-display text-3xl md:text-4xl text-primary leading-tight">
+              {pageTitle}
+            </h1>
           </div>
         </section>
       )}
@@ -145,7 +146,9 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
                   className="rounded-full border border-border bg-card px-3 py-1 text-[11px] tracking-wide hover:border-primary/40 transition-colors"
                 >
                   {cat.label}
-                  <span className="ml-1 opacity-60">({countProductsByType(products, cat.type)})</span>
+                  <span className="ml-1 opacity-60">
+                    ({countProductsByType(products, cat.type)})
+                  </span>
                 </Link>
               ))}
             </nav>
@@ -179,7 +182,9 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
 
           {(fixedCategory?.type === "Parfum" || productType === "Parfum") && (
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] uppercase tracking-widest text-muted-foreground mr-1">Famille</span>
+              <span className="text-[10px] uppercase tracking-widest text-muted-foreground mr-1">
+                Famille
+              </span>
               {(["Tous", ...perfumeFamilies] as const).map((f) => {
                 const count =
                   f === "Tous"
@@ -206,7 +211,10 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
         </div>
       </div>
 
-      <section id={fixedCategory ? "produits-categorie" : undefined} className="container-x py-6 md:py-8">
+      <section
+        id={fixedCategory ? "produits-categorie" : undefined}
+        className="container-x py-6 md:py-8"
+      >
         {fixedCategory && !isEmptyCategory && list.length > 0 && (
           <SectionHeader
             eyebrow="Sélection"
@@ -217,38 +225,40 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
         )}
 
         <div className={fixedCategory && !isEmptyCategory && list.length > 0 ? "mt-5" : ""}>
-        {isEmptyCategory ? (
-          <EmptyCategoryPanel category={fixedCategory} onReset={resetFilters} />
-        ) : list.length === 0 ? (
-          <div className="rounded-3xl border border-dashed border-border bg-card/50 px-6 py-20 text-center">
-            <Package className="mx-auto h-12 w-12 text-muted-foreground/50" />
-            <h2 className="mt-4 font-display text-2xl text-primary">Aucun produit trouvé</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Modifiez votre recherche ou réinitialisez les filtres.</p>
-            <button
-              type="button"
-              onClick={resetFilters}
-              className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90"
-            >
-              Réinitialiser
-            </button>
-          </div>
-        ) : !fixedCategory && productType === "Tous" ? (
-          <div className="space-y-8">
-            {catalogCategories.map((cat) => (
-              <CategorySection
-                key={cat.type}
-                category={cat}
-                products={list.filter((p) => p.type === cat.type)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {list.map((p) => (
-              <ProductCard key={p.ref} product={p} showRef />
-            ))}
-          </div>
-        )}
+          {isEmptyCategory ? (
+            <EmptyCategoryPanel category={fixedCategory} onReset={resetFilters} />
+          ) : list.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-border bg-card/50 px-6 py-20 text-center">
+              <Package className="mx-auto h-12 w-12 text-muted-foreground/50" />
+              <h2 className="mt-4 font-display text-2xl text-primary">Aucun produit trouvé</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Modifiez votre recherche ou réinitialisez les filtres.
+              </p>
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="mt-6 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:opacity-90"
+              >
+                Réinitialiser
+              </button>
+            </div>
+          ) : !fixedCategory && productType === "Tous" ? (
+            <div className="space-y-8">
+              {catalogCategories.map((cat) => (
+                <CategorySection
+                  key={cat.type}
+                  category={cat}
+                  products={list.filter((p) => p.type === cat.type)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {list.map((p) => (
+                <ProductCard key={p.ref} product={p} showRef />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

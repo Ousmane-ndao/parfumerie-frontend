@@ -32,7 +32,11 @@ type EmptyCategoryPanelProps = {
   onReset?: () => void;
 };
 
-export function EmptyCategoryPanel({ category, compact = false, onReset }: EmptyCategoryPanelProps) {
+export function EmptyCategoryPanel({
+  category,
+  compact = false,
+  onReset,
+}: EmptyCategoryPanelProps) {
   const styles = accentStyles[category.accent];
   const Icon = categoryIcons[category.type];
   const others = catalogCategories.filter((c) => c.slug !== category.slug);
@@ -48,11 +52,20 @@ export function EmptyCategoryPanel({ category, compact = false, onReset }: Empty
       <div className={cn("mx-auto grid h-12 w-12 place-items-center rounded-xl", styles.icon)}>
         <Icon className="h-6 w-6" />
       </div>
-      <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Bientôt disponible</p>
-      <h2 className={cn("mt-2 font-display text-primary", compact ? "text-xl" : "text-2xl md:text-3xl")}>
+      <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+        Bientôt disponible
+      </p>
+      <h2
+        className={cn(
+          "mt-2 font-display text-primary",
+          compact ? "text-xl" : "text-2xl md:text-3xl",
+        )}
+      >
         {category.emptyTitle}
       </h2>
-      <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">{category.emptyMessage}</p>
+      <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto leading-relaxed">
+        {category.emptyMessage}
+      </p>
 
       <div className="mt-6 flex flex-wrap justify-center gap-2">
         <a
@@ -84,7 +97,9 @@ export function EmptyCategoryPanel({ category, compact = false, onReset }: Empty
 
       {!compact && others.length > 0 && (
         <div className="mt-6 pt-5 border-t border-border/50">
-          <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">En attendant, explorez</p>
+          <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-2">
+            En attendant, explorez
+          </p>
           <div className="flex flex-wrap justify-center gap-1.5">
             {others.map((cat) => (
               <Link

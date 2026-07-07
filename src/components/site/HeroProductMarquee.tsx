@@ -28,7 +28,10 @@ export function HeroProductOrbit({ products, className }: HeroProductOrbitProps)
 
   return (
     <div
-      className={cn("pointer-events-none absolute inset-0 flex items-center justify-center", className)}
+      className={cn(
+        "pointer-events-none absolute inset-0 flex items-center justify-center",
+        className,
+      )}
       aria-hidden
     >
       <div className="relative h-[280px] w-[280px] md:h-[340px] md:w-[340px] [--orbit-r:118px] md:[--orbit-r:148px]">

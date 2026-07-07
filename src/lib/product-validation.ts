@@ -40,7 +40,12 @@ export function parseProductInput(body: unknown): ProductInput | string {
   if (!notesRaw || typeof notesRaw !== "object") return "Notes invalides";
   const notesObj = notesRaw as Record<string, unknown>;
   const toArray = (v: unknown) =>
-    Array.isArray(v) ? v.map(String).filter(Boolean) : String(v ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+    Array.isArray(v)
+      ? v.map(String).filter(Boolean)
+      : String(v ?? "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
 
   return {
     ref,

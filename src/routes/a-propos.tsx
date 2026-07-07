@@ -6,9 +6,16 @@ export const Route = createFileRoute("/a-propos")({
   head: () => ({
     meta: [
       { title: "À propos — Salaicha Parfumeur" },
-      { name: "description", content: "Salaicha Parfumeur : notre histoire, notre mission et notre expertise unique en parfumerie sénégalaise de luxe." },
+      {
+        name: "description",
+        content:
+          "Salaicha Parfumeur : notre histoire, notre mission et notre expertise unique en parfumerie sénégalaise de luxe.",
+      },
       { property: "og:title", content: "À propos — Salaicha Parfumeur" },
-      { property: "og:description", content: "Découvrez l'histoire et les valeurs de la maison Salaicha Parfumeur." },
+      {
+        property: "og:description",
+        content: "Découvrez l'histoire et les valeurs de la maison Salaicha Parfumeur.",
+      },
     ],
   }),
   component: About,
@@ -25,8 +32,9 @@ function About() {
               L'art du parfum, à la sénégalaise
             </h1>
             <p className="mt-4 text-foreground/75 leading-relaxed">
-              Salaicha Parfumeur est née d'une passion : célébrer la beauté des matières naturelles et offrir une parfumerie d'exception,
-              ancrée dans l'élégance et la modernité africaine. Chaque fragrance est pensée comme un voyage sensoriel.
+              Salaicha Parfumeur est née d'une passion : célébrer la beauté des matières naturelles
+              et offrir une parfumerie d'exception, ancrée dans l'élégance et la modernité
+              africaine. Chaque fragrance est pensée comme un voyage sensoriel.
             </p>
           </div>
           <div className="relative flex items-center justify-center">
@@ -46,9 +54,21 @@ function About() {
 
       <section className="container-x py-16 grid gap-10 md:grid-cols-3">
         {[
-          { icon: Heart, t: "Notre mission", d: "Démocratiser la parfumerie d'exception au Sénégal en proposant des fragrances raffinées, accessibles et porteuses d'identité." },
-          { icon: Leaf, t: "Nos valeurs", d: "Authenticité, exigence et respect des matières premières. Nous travaillons avec des producteurs partenaires soigneusement choisis." },
-          { icon: Award, t: "Notre expertise", d: "Plusieurs années de savoir-faire au service d'une parfumerie créative, à mi-chemin entre tradition orientale et modernité." },
+          {
+            icon: Heart,
+            t: "Notre mission",
+            d: "Démocratiser la parfumerie d'exception au Sénégal en proposant des fragrances raffinées, accessibles et porteuses d'identité.",
+          },
+          {
+            icon: Leaf,
+            t: "Nos valeurs",
+            d: "Authenticité, exigence et respect des matières premières. Nous travaillons avec des producteurs partenaires soigneusement choisis.",
+          },
+          {
+            icon: Award,
+            t: "Notre expertise",
+            d: "Plusieurs années de savoir-faire au service d'une parfumerie créative, à mi-chemin entre tradition orientale et modernité.",
+          },
         ].map(({ icon: Icon, t, d }) => (
           <div key={t} className="rounded-2xl border border-border bg-card p-6">
             <div className="grid h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary">
@@ -65,12 +85,14 @@ function About() {
           <h2 className="font-display text-4xl text-rose">Notre histoire</h2>
           <div className="mt-6 grid gap-6 md:grid-cols-2 text-cream/85 leading-relaxed">
             <p>
-              De Dakar à l'Orient, Salaicha Parfumeur puise son inspiration dans les routes anciennes des matières précieuses : rose,
-              oud, jasmin, vanille. Notre maison réunit le geste artisanal et l'exigence du sur-mesure.
+              De Dakar à l'Orient, Salaicha Parfumeur puise son inspiration dans les routes
+              anciennes des matières précieuses : rose, oud, jasmin, vanille. Notre maison réunit le
+              geste artisanal et l'exigence du sur-mesure.
             </p>
             <p>
-              Chaque flacon est une invitation à l'évasion, pensé pour les femmes et les hommes qui souhaitent affirmer leur signature
-              olfactive avec élégance. Le luxe, selon Salaicha, est intime, sensoriel et profondément humain.
+              Chaque flacon est une invitation à l'évasion, pensé pour les femmes et les hommes qui
+              souhaitent affirmer leur signature olfactive avec élégance. Le luxe, selon Salaicha,
+              est intime, sensoriel et profondément humain.
             </p>
           </div>
         </div>

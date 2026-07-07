@@ -29,7 +29,8 @@ export const faqGroups: FaqGroup[] = [
       {
         id: "commande",
         q: "Comment passer commande ?",
-        intro: "La commande se fait en quelques étapes simples, entièrement via WhatsApp Business :",
+        intro:
+          "La commande se fait en quelques étapes simples, entièrement via WhatsApp Business :",
         bullets: [
           "Parcourez le catalogue et ouvrez la fiche du produit souhaité.",
           "Cliquez sur « Commander via WhatsApp » et remplissez le formulaire (nom, téléphone, adresse, quantité).",
@@ -142,8 +143,12 @@ export function FaqList() {
   return (
     <div className="mt-14 border-t border-border/60 pt-12">
       <div className="mb-8 max-w-2xl">
-        <p className="text-xs uppercase tracking-[0.2em] text-rose-deep font-medium">Réponses détaillées</p>
-        <h2 className="mt-2 font-display text-3xl md:text-4xl text-primary">Tout ce qu'il faut savoir</h2>
+        <p className="text-xs uppercase tracking-[0.2em] text-rose-deep font-medium">
+          Réponses détaillées
+        </p>
+        <h2 className="mt-2 font-display text-3xl md:text-4xl text-primary">
+          Tout ce qu'il faut savoir
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Commande, paiement, livraison et qualité — organisé par thème pour vous guider rapidement.
         </p>

@@ -9,10 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Product } from "@/lib/products";
-import {
-  type CatalogCategoryConfig,
-  type CategoryAccent,
-} from "@/lib/catalog";
+import { type CatalogCategoryConfig, type CategoryAccent } from "@/lib/catalog";
 import { whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
@@ -69,9 +66,15 @@ export function CategoryPageHeader({ category, products }: CategoryPageHeaderPro
             >
               <ArrowLeft className="h-3.5 w-3.5" /> Tout le catalogue
             </Link>
-            <p className="mt-2 text-xs uppercase tracking-[0.2em] text-rose-deep font-medium">Catégorie</p>
-            <h1 className="mt-1 font-display text-3xl md:text-4xl leading-tight text-primary">{category.label}</h1>
-            <p className="mt-2 max-w-lg text-sm text-foreground/75 leading-relaxed">{category.description}</p>
+            <p className="mt-2 text-xs uppercase tracking-[0.2em] text-rose-deep font-medium">
+              Catégorie
+            </p>
+            <h1 className="mt-1 font-display text-3xl md:text-4xl leading-tight text-primary">
+              {category.label}
+            </h1>
+            <p className="mt-2 max-w-lg text-sm text-foreground/75 leading-relaxed">
+              {category.description}
+            </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <a
                 href="#produits-categorie"
@@ -93,10 +96,25 @@ export function CategoryPageHeader({ category, products }: CategoryPageHeaderPro
           </div>
 
           <div className="relative flex items-center justify-center lg:w-72">
-            <div className={cn("absolute -inset-3 rounded-2xl bg-gradient-to-tr blur-2xl", styles.glow)} />
-            <div className={cn("relative w-full rounded-xl border bg-gradient-to-br p-4 shadow-elegant", styles.card)}>
+            <div
+              className={cn(
+                "absolute -inset-3 rounded-2xl bg-gradient-to-tr blur-2xl",
+                styles.glow,
+              )}
+            />
+            <div
+              className={cn(
+                "relative w-full rounded-xl border bg-gradient-to-br p-4 shadow-elegant",
+                styles.card,
+              )}
+            >
               <div className="flex items-center gap-3">
-                <div className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-xl", styles.icon)}>
+                <div
+                  className={cn(
+                    "grid h-10 w-10 shrink-0 place-items-center rounded-xl",
+                    styles.icon,
+                  )}
+                >
                   <Icon className="h-5 w-5" />
                 </div>
                 <div className="flex flex-1 justify-around text-center">
@@ -107,7 +125,9 @@ export function CategoryPageHeader({ category, products }: CategoryPageHeaderPro
                   ].map(({ label, value }) => (
                     <div key={label}>
                       <p className="font-display text-xl text-primary leading-none">{value}</p>
-                      <p className="mt-0.5 text-[9px] uppercase tracking-wider text-muted-foreground">{label}</p>
+                      <p className="mt-0.5 text-[9px] uppercase tracking-wider text-muted-foreground">
+                        {label}
+                      </p>
                     </div>
                   ))}
                 </div>

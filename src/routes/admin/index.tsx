@@ -72,7 +72,11 @@ function AdminDashboard() {
         </div>
         <div className="flex flex-wrap gap-2">
           <label className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-border px-4 py-2 text-sm hover:bg-muted">
-            {importing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Upload className="h-4 w-4" />}
+            {importing ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Upload className="h-4 w-4" />
+            )}
             Importer JSON
             <input
               type="file"
@@ -93,7 +97,11 @@ function AdminDashboard() {
         </div>
       </div>
 
-      {error && <p className="mb-4 rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">{error}</p>}
+      {error && (
+        <p className="mb-4 rounded-lg bg-destructive/10 px-4 py-2 text-sm text-destructive">
+          {error}
+        </p>
+      )}
 
       {loading ? (
         <div className="flex justify-center py-16">
@@ -101,7 +109,9 @@ function AdminDashboard() {
         </div>
       ) : products.length === 0 ? (
         <div className="rounded-2xl border border-dashed border-border px-6 py-16 text-center">
-          <p className="text-muted-foreground">Aucun produit. Ajoutez-en un ou lancez le script de seed.</p>
+          <p className="text-muted-foreground">
+            Aucun produit. Ajoutez-en un ou lancez le script de seed.
+          </p>
           <code className="mt-3 block text-xs text-muted-foreground">npm run db:seed</code>
         </div>
       ) : (
@@ -112,7 +122,10 @@ function AdminDashboard() {
             return (
               <section key={type}>
                 <h2 className="mb-3 font-display text-xl text-primary">
-                  {type} <span className="text-sm font-normal text-muted-foreground">({items.length})</span>
+                  {type}{" "}
+                  <span className="text-sm font-normal text-muted-foreground">
+                    ({items.length})
+                  </span>
                 </h2>
                 <div className="overflow-x-auto rounded-xl border border-border">
                   <table className="w-full min-w-[640px] text-sm">
@@ -130,7 +143,11 @@ function AdminDashboard() {
                       {items.map((p) => (
                         <tr key={p.id} className="border-b border-border/60 last:border-0">
                           <td className="px-4 py-3">
-                            <img src={resolveMediaUrl(p.image)} alt="" className="h-10 w-10 rounded object-cover" />
+                            <img
+                              src={resolveMediaUrl(p.image)}
+                              alt=""
+                              className="h-10 w-10 rounded object-cover"
+                            />
                           </td>
                           <td className="px-4 py-3 font-mono text-xs">{p.ref}</td>
                           <td className="px-4 py-3">{p.name}</td>
@@ -141,7 +158,9 @@ function AdminDashboard() {
                             ) : (
                               <span className="text-muted-foreground">Indisponible</span>
                             )}
-                            {p.featured && <span className="ml-2 text-xs text-rose-deep">★ Phare</span>}
+                            {p.featured && (
+                              <span className="ml-2 text-xs text-rose-deep">★ Phare</span>
+                            )}
                           </td>
                           <td className="px-4 py-3">
                             <div className="flex justify-end gap-2">

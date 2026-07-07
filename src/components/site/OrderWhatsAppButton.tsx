@@ -82,7 +82,9 @@ export function OrderWhatsAppButton({ product, className, children }: OrderWhats
       <Dialog open={open} onOpenChange={handleOpenChange}>
         <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle className="font-display text-2xl text-primary">Finaliser votre commande</DialogTitle>
+            <DialogTitle className="font-display text-2xl text-primary">
+              Finaliser votre commande
+            </DialogTitle>
             <DialogDescription>
               Renseignez vos informations avant d&apos;envoyer la commande sur WhatsApp.
             </DialogDescription>
@@ -196,15 +198,7 @@ export function OrderWhatsAppButton({ product, className, children }: OrderWhats
   );
 }
 
-function Field({
-  label,
-  error,
-  children,
-}: {
-  label: string;
-  error?: string;
-  children: ReactNode;
-}) {
+function Field({ label, error, children }: { label: string; error?: string; children: ReactNode }) {
   return (
     <div className="space-y-1.5">
       <Label>{label}</Label>

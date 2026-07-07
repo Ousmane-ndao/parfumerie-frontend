@@ -49,8 +49,8 @@ function FAQ() {
             Questions fréquentes
           </h1>
           <p className="mt-4 text-foreground/70 leading-relaxed">
-            Vous ne trouvez pas la réponse à votre question ? Contactez-nous directement sur WhatsApp
-            Business.
+            Vous ne trouvez pas la réponse à votre question ? Contactez-nous directement sur
+            WhatsApp Business.
           </p>
           <a
             href={whatsappLink("Bonjour, j'ai une question.")}

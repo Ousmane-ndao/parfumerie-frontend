@@ -9,7 +9,8 @@ export const Route = createFileRoute("/catalogue")({
       { title: "Catalogue — Salaicha Parfumeur" },
       {
         name: "description",
-        content: "Parfums, diffuseurs électriques et appareils Doppler — trois catégories distinctes.",
+        content:
+          "Parfums, diffuseurs électriques et appareils Doppler — trois catégories distinctes.",
       },
     ],
   }),

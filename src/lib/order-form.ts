@@ -34,7 +34,8 @@ export function validateOrderInfo(info: OrderInfo): Partial<Record<keyof OrderIn
   const errors: Partial<Record<keyof OrderInfo, string>> = {};
   if (!info.fullName.trim()) errors.fullName = "Le nom et prénom sont obligatoires.";
   if (!info.phone.trim()) errors.phone = "Le téléphone est obligatoire.";
-  else if (!/^[+\d\s()-]{8,}$/.test(info.phone.trim())) errors.phone = "Numéro de téléphone invalide.";
+  else if (!/^[+\d\s()-]{8,}$/.test(info.phone.trim()))
+    errors.phone = "Numéro de téléphone invalide.";
   if (!info.quantity.trim()) errors.quantity = "La quantité est obligatoire.";
   else if (!/^\d+$/.test(info.quantity.trim()) || Number(info.quantity) < 1) {
     errors.quantity = "Indiquez une quantité valide (minimum 1).";

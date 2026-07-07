@@ -20,7 +20,8 @@ export async function adminFetch<T>(url: string, init?: RequestInit): Promise<T>
     return data;
   } catch (error) {
     const message =
-      axiosErrorMessage(error) ?? `Erreur ${(error as { response?: { status?: number } }).response?.status ?? "réseau"}`;
+      axiosErrorMessage(error) ??
+      `Erreur ${(error as { response?: { status?: number } }).response?.status ?? "réseau"}`;
     throw new Error(message);
   }
 }
@@ -42,11 +43,14 @@ export async function checkAdminSession() {
 }
 
 export async function adminLogin(email: string, password: string) {
-  const data = await adminFetch<{ ok: boolean; email: string; id: number; token: string }>("/api/admin/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
+  const data = await adminFetch<{ ok: boolean; email: string; id: number; token: string }>(
+    "/api/admin/login",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    },
+  );
   localStorage.setItem(TOKEN_KEY, data.token);
   return data;
 }

@@ -43,7 +43,12 @@ const accents = {
   gold: "from-gold/30 to-gold/5 border-gold/30",
 };
 
-export function CategoryCard({ category, count, accent = "rose", active = false }: CategoryCardProps) {
+export function CategoryCard({
+  category,
+  count,
+  accent = "rose",
+  active = false,
+}: CategoryCardProps) {
   const empty = count === 0;
   return (
     <Link
@@ -53,7 +58,8 @@ export function CategoryCard({ category, count, accent = "rose", active = false 
       className={cn(
         "group relative overflow-hidden rounded-2xl border bg-gradient-to-br p-5 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elegant",
         accents[accent],
-        active && "ring-2 ring-primary ring-offset-2 ring-offset-background shadow-elegant -translate-y-0.5",
+        active &&
+          "ring-2 ring-primary ring-offset-2 ring-offset-background shadow-elegant -translate-y-0.5",
       )}
     >
       <p className="text-[10px] uppercase tracking-widest text-muted-foreground">
