@@ -3,6 +3,7 @@ import { ArrowRight, Star } from "lucide-react";
 import { productDisplayBadge } from "@/lib/catalog";
 import { formatFCFA, type Product } from "@/lib/products";
 import { OrderWhatsAppButton } from "@/components/site/OrderWhatsAppButton";
+import { resolveMediaUrl } from "@/services/api"; // ← IMPORT CORRIGÉ
 
 type ProductCardProps = {
   product: Product;
@@ -15,7 +16,7 @@ export function ProductCard({ product: p, showRef = false }: ProductCardProps) {
       <Link to="/produit/$ref" params={{ ref: p.ref }} className="block flex-1">
         <div className="relative overflow-hidden aspect-[4/3] bg-muted">
           <img
-            src={p.image}
+            src={resolveMediaUrl(p.image)}
             alt={p.name}
             width={1024}
             height={1024}
@@ -46,10 +47,16 @@ export function ProductCard({ product: p, showRef = false }: ProductCardProps) {
           {showRef && (
             <p className="text-[9px] uppercase tracking-widest text-muted-foreground">{p.ref}</p>
           )}
-          <h3 className={`font-display text-lg text-primary line-clamp-2 leading-snug ${showRef ? "mt-0.5" : ""}`}>
+          <h3
+            className={`font-display text-lg text-primary line-clamp-2 leading-snug ${
+              showRef ? "mt-0.5" : ""
+            }`}
+          >
             {p.name}
           </h3>
-          <p className="mt-1 text-xs text-muted-foreground line-clamp-2 leading-relaxed">{p.short}</p>
+          <p className="mt-1 text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+            {p.short}
+          </p>
         </div>
       </Link>
       <div className="mt-auto border-t border-border/60 px-3.5 py-2.5">
@@ -74,7 +81,9 @@ export function SectionHeader({ eyebrow, title, description, action }: SectionHe
     <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="max-w-2xl">
         <p className="text-xs uppercase tracking-[0.2em] text-rose-deep font-medium">{eyebrow}</p>
-        <h2 className="mt-2 font-display text-4xl md:text-5xl text-primary leading-tight">{title}</h2>
+        <h2 className="mt-2 font-display text-4xl md:text-5xl text-primary leading-tight">
+          {title}
+        </h2>
         {description && <p className="mt-3 text-foreground/70 leading-relaxed">{description}</p>}
       </div>
       {action && (

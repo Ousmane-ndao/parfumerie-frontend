@@ -38,10 +38,16 @@ function AdminLoginPage() {
             <Lock className="h-6 w-6" />
           </div>
           <h1 className="font-display text-2xl text-primary">Administration</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Salaicha Parfumeur — gestion du catalogue</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Salaicha Parfumeur — gestion du catalogue
+          </p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
-          {error && <p className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">{error}</p>}
+          {error && (
+            <p className="rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive">
+              {error}
+            </p>
+          )}
           <label className="block space-y-1 text-sm">
             <span>Email</span>
             <input

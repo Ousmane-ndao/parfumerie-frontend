@@ -8,6 +8,7 @@ import { CategoryCard } from "@/components/site/CatalogWidgets";
 import { HeroProductOrbit } from "@/components/site/HeroProductMarquee";
 import { ProductCard, SectionHeader } from "@/components/site/ProductCard";
 import { site } from "@/lib/site-config";
+import type { Product } from "@/lib/products"; // ← Ajout pour le typage
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -17,7 +18,11 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: `${site.name} — Parfums d'exception à Dakar` },
-      { name: "description", content: "Découvrez les fragrances Salaicha Parfumeur : rose, oud, jasmin, boisés. Commande facile via WhatsApp Business." },
+      {
+        name: "description",
+        content:
+          "Découvrez les fragrances Salaicha Parfumeur : rose, oud, jasmin, boisés. Commande facile via WhatsApp Business.",
+      },
       { property: "og:title", content: `${site.name} — Parfums d'exception` },
       { property: "og:description", content: site.description },
     ],
@@ -27,7 +32,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { products } = Route.useLoaderData();
-  const featured = products.filter((p) => p.featured);
+  const featured = products.filter((p: Product) => p.featured); // ← Typage explicite
 
   return (
     <>
@@ -36,7 +41,8 @@ function Home() {
         <div className="relative z-10 container-x grid gap-8 py-10 md:py-12 lg:grid-cols-2 items-center">
           <div className="order-2 lg:order-1">
             <h1 className="font-display text-4xl md:text-5xl leading-tight text-primary">
-              L'élégance de la rose,<br />
+              L'élégance de la rose,
+              <br />
               l'esprit du <span className="italic text-rose-deep">naturel</span>.
             </h1>
             <p className="mt-3 max-w-lg text-sm md:text-base text-foreground/75">
@@ -81,7 +87,7 @@ function Home() {
           action={{ label: "Tout le catalogue", to: "/catalogue" }}
         />
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {featured.map((p) => (
+          {featured.map((p: Product) => (
             <ProductCard key={p.ref} product={p} />
           ))}
         </div>
@@ -106,11 +112,26 @@ function Home() {
         <div className="container-x py-10">
           <div className="grid gap-4 md:grid-cols-3">
             {[
-              { icon: Sparkles, t: "Matières d'exception", d: "Essences naturelles soigneusement sélectionnées." },
-              { icon: ShieldCheck, t: "Qualité garantie", d: "Chaque produit est contrôlé avant livraison." },
-              { icon: Truck, t: "Livraison nationale", d: "Dakar et tout le Sénégal via WhatsApp." },
+              {
+                icon: Sparkles,
+                t: "Matières d'exception",
+                d: "Essences naturelles soigneusement sélectionnées.",
+              },
+              {
+                icon: ShieldCheck,
+                t: "Qualité garantie",
+                d: "Chaque produit est contrôlé avant livraison.",
+              },
+              {
+                icon: Truck,
+                t: "Livraison nationale",
+                d: "Dakar et tout le Sénégal via WhatsApp.",
+              },
             ].map(({ icon: Icon, t, d }) => (
-              <div key={t} className="flex gap-3 rounded-xl border border-border/70 bg-background p-4">
+              <div
+                key={t}
+                className="flex gap-3 rounded-xl border border-border/70 bg-background p-4"
+              >
                 <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
                   <Icon className="h-4 w-4" />
                 </div>
