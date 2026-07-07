@@ -8,7 +8,7 @@ import { CategoryCard } from "@/components/site/CatalogWidgets";
 import { HeroProductOrbit } from "@/components/site/HeroProductMarquee";
 import { ProductCard, SectionHeader } from "@/components/site/ProductCard";
 import { site } from "@/lib/site-config";
-import type { Product } from "@/lib/products"; // ← Ajout pour le typage
+import type { Product } from "@/lib/products";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { products } = Route.useLoaderData();
-  const featured = products.filter((p: Product) => p.featured); // ← Typage explicite
+  const featured = products.filter((p: Product) => p.featured);
 
   return (
     <>
@@ -66,20 +66,20 @@ function Home() {
 
           <div className="relative order-1 lg:order-2 flex items-center justify-center min-h-[280px] md:min-h-[340px]">
             <HeroProductOrbit products={products} />
-            <div className="relative z-10 flex h-32 w-32 items-center justify-center rounded-full border border-border/60 bg-card/95 shadow-elegant backdrop-blur-sm md:h-40 md:w-40">
+            <div className="relative z-10">
               <img
                 src={logo}
                 alt="Salaicha parfumeur"
                 width={400}
                 height={160}
-                className="w-[70%] h-auto object-contain"
+                className="w-auto h-auto max-h-40 md:max-h-56 object-contain drop-shadow-xl"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* PRODUITS PHARES — directement après le hero */}
+      {/* PRODUITS PHARES */}
       <section id="produits" className="container-x py-10 md:py-12">
         <SectionHeader
           eyebrow="Sélection"
@@ -93,7 +93,7 @@ function Home() {
         </div>
       </section>
 
-      {/* CATÉGORIES — compact */}
+      {/* CATÉGORIES */}
       <section className="container-x pb-12">
         <div className="grid gap-3 sm:grid-cols-3">
           {catalogCategories.map((cat) => (
