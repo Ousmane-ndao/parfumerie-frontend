@@ -3,6 +3,7 @@ import { ArrowLeft, MessageCircle, Check, X } from "lucide-react";
 import { OrderWhatsAppButton } from "@/components/site/OrderWhatsAppButton";
 import { formatFCFA, isParfum, type Product } from "@/lib/products";
 import { fetchProduct, fetchProducts } from "@/lib/products-api";
+import { resolveMediaUrl } from "@/services/api";
 
 export const Route = createFileRoute("/produit/$ref")({
   loader: async ({ params }) => {
@@ -88,7 +89,7 @@ function ProductPage() {
         <div className="relative">
           <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-rose/30 to-emerald-soft/20 blur-2xl" />
           <img
-            src={p.image}
+            src={resolveMediaUrl(p.image)}
             alt={p.name}
             width={1024}
             height={1024}
@@ -175,7 +176,7 @@ function ProductPage() {
               >
                 <div className="overflow-hidden aspect-square bg-muted">
                   <img
-                    src={r.image}
+                    src={resolveMediaUrl(r.image)}
                     alt={r.name}
                     loading="lazy"
                     width={1024}
