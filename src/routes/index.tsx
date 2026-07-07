@@ -36,7 +36,6 @@ function Home() {
 
   return (
     <>
-      {/* HERO compact */}
       <section className="relative overflow-hidden page-hero-gradient border-b border-border/60">
         <div className="relative z-10 container-x grid gap-8 py-10 md:py-12 lg:grid-cols-2 items-center">
           <div className="order-2 lg:order-1">
@@ -66,20 +65,20 @@ function Home() {
 
           <div className="relative order-1 lg:order-2 flex items-center justify-center min-h-[280px] md:min-h-[340px]">
             <HeroProductOrbit products={products} />
+            {/* Logo sans cercle, plus grand */}
             <div className="relative z-10">
               <img
                 src={logo}
                 alt="Salaicha parfumeur"
-                width={400}
-                height={160}
-                className="w-auto h-auto max-h-40 md:max-h-56 object-contain drop-shadow-xl"
+                width={600}
+                height={240}
+                className="w-auto h-auto max-h-48 md:max-h-64 object-contain drop-shadow-xl"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* PRODUITS PHARES */}
       <section id="produits" className="container-x py-10 md:py-12">
         <SectionHeader
           eyebrow="Sélection"
@@ -93,7 +92,6 @@ function Home() {
         </div>
       </section>
 
-      {/* CATÉGORIES */}
       <section className="container-x pb-12">
         <div className="grid gap-3 sm:grid-cols-3">
           {catalogCategories.map((cat) => (
@@ -107,7 +105,6 @@ function Home() {
         </div>
       </section>
 
-      {/* ENGAGEMENTS */}
       <section className="border-y border-border bg-card/50">
         <div className="container-x py-10">
           <div className="grid gap-4 md:grid-cols-3">
@@ -145,7 +142,6 @@ function Home() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="container-x py-12">
         <div className="rounded-2xl bg-emerald-deep text-cream p-8 md:p-10 grid gap-6 md:grid-cols-2 items-center shadow-elegant">
           <div>
