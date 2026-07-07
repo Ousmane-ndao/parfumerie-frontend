@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search, Package, X, MessageCircle } from "lucide-react";
 import type { Product, ProductType, PerfumeFamily } from "@/lib/products";
 import { perfumeFamilies, countProductsByType } from "@/lib/products";
@@ -27,6 +27,22 @@ type CatalogViewProps = {
   fixedCategory?: CatalogCategoryConfig;
 };
 
+/** Normalise le type produit (espaces, unicode) pour comparer avec la config catalogue. */
+function normalizeType(value: unknown): string {
+  return String(value ?? "").trim().normalize("NFC");
+}
+
+function typesMatch(a: unknown, b: unknown): boolean {
+  return normalizeType(a) === normalizeType(b);
+}
+
+function isParfumFilterActive(
+  fixedCategory: CatalogCategoryConfig | undefined,
+  productType: ProductType | "Tous",
+): boolean {
+  return fixedCategory?.type === "Parfum" || productType === "Parfum";
+}
+
 export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
   const [q, setQ] = useState("");
   const [productType, setProductType] = useState<ProductType | "Tous">(
@@ -35,17 +51,33 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
   const [family, setFamily] = useState<PerfumeFamily | "Tous">("Tous");
   const [sort, setSort] = useState<SortOption>("default");
 
+  // Resynchroniser les filtres quand on change de page catalogue / catégorie
+  useEffect(() => {
+    setProductType(fixedCategory?.type ?? "Tous");
+    setFamily("Tous");
+  }, [fixedCategory?.slug]);
+
+  const parfumFilterActive = isParfumFilterActive(fixedCategory, productType);
+
   const list = useMemo(() => {
+    const query = q.trim().toLowerCase();
+
     let result = products.filter((p) => {
-      const matchType = productType === "Tous" || p.type === productType;
-      const matchFamily = family === "Tous" || p.family === family;
+      const matchType = productType === "Tous" || typesMatch(p.type, productType);
+
+      // Le filtre famille ne s'applique que sur la catégorie Parfums
+      const matchFamily =
+        !parfumFilterActive || family === "Tous" || p.family === family;
+
       const matchQ =
-        q.trim() === "" ||
-        p.name.toLowerCase().includes(q.toLowerCase()) ||
-        p.short.toLowerCase().includes(q.toLowerCase()) ||
-        p.ref.toLowerCase().includes(q.toLowerCase());
+        query === "" ||
+        p.name.toLowerCase().includes(query) ||
+        (p.short ?? "").toLowerCase().includes(query) ||
+        p.ref.toLowerCase().includes(query);
+
       return matchType && matchFamily && matchQ;
     });
+
     switch (sort) {
       case "price-asc":
         result = [...result].sort((a, b) => a.price - b.price);
@@ -58,12 +90,12 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
         break;
     }
     return result;
-  }, [products, q, productType, family, sort]);
+  }, [products, q, productType, family, sort, parfumFilterActive]);
 
   const hasFilters =
     q.trim() !== "" ||
     (!fixedCategory && productType !== "Tous") ||
-    family !== "Tous" ||
+    (parfumFilterActive && family !== "Tous") ||
     sort !== "default";
 
   function resetFilters() {
@@ -74,11 +106,9 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
   }
 
   const pageTitle = fixedCategory?.label ?? "Notre catalogue";
-
-  const isEmptyCategory = fixedCategory && list.length === 0;
-  console.log("📦 Produits reçus :", products);
-  console.log("📋 Liste filtrée :", list);
-  console.log("🔍 Filtre actif :", productType);
+  const isEmptyCategory = Boolean(fixedCategory && list.length === 0);
+  const showGroupedCatalog =
+    !fixedCategory && productType === "Tous" && family === "Tous" && q.trim() === "";
 
   return (
     <>
@@ -93,6 +123,12 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
             <h1 className="mt-1 font-display text-3xl md:text-4xl text-primary leading-tight">
               {pageTitle}
             </h1>
+            {products.length > 0 && (
+              <p className="mt-2 text-sm text-muted-foreground">
+                {list.length} produit{list.length > 1 ? "s" : ""} affiché
+                {list.length !== products.length ? ` sur ${products.length}` : ""}
+              </p>
+            )}
           </div>
         </section>
       )}
@@ -137,7 +173,12 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
             <nav className="flex flex-wrap gap-1.5" aria-label="Catégories produits">
               <Link
                 to="/catalogue"
-                className="rounded-full border border-primary bg-primary px-3 py-1 text-[11px] tracking-wide text-primary-foreground"
+                className={cn(
+                  "rounded-full border px-3 py-1 text-[11px] tracking-wide transition-colors",
+                  productType === "Tous"
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-card hover:border-primary/40",
+                )}
               >
                 Tout ({products.length})
               </Link>
@@ -183,7 +224,7 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
             </nav>
           )}
 
-          {(fixedCategory?.type === "Parfum" || productType === "Parfum") && (
+          {parfumFilterActive && (
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-[10px] uppercase tracking-widest text-muted-foreground mr-1">
                 Famille
@@ -191,8 +232,8 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
               {(["Tous", ...perfumeFamilies] as const).map((f) => {
                 const count =
                   f === "Tous"
-                    ? countProductsByType(products, "Parfum")
-                    : products.filter((p) => p.type === "Parfum" && p.family === f).length;
+                    ? products.filter((p) => typesMatch(p.type, "Parfum")).length
+                    : products.filter((p) => typesMatch(p.type, "Parfum") && p.family === f).length;
                 return (
                   <button
                     key={f}
@@ -229,7 +270,7 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
 
         <div className={fixedCategory && !isEmptyCategory && list.length > 0 ? "mt-5" : ""}>
           {isEmptyCategory ? (
-            <EmptyCategoryPanel category={fixedCategory} onReset={resetFilters} />
+            <EmptyCategoryPanel category={fixedCategory!} onReset={resetFilters} />
           ) : list.length === 0 ? (
             <div className="rounded-3xl border border-dashed border-border bg-card/50 px-6 py-20 text-center">
               <Package className="mx-auto h-12 w-12 text-muted-foreground/50" />
@@ -245,15 +286,19 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
                 Réinitialiser
               </button>
             </div>
-          ) : !fixedCategory && productType === "Tous" ? (
+          ) : showGroupedCatalog ? (
             <div className="space-y-8">
-              {catalogCategories.map((cat) => (
-                <CategorySection
-                  key={cat.type}
-                  category={cat}
-                  products={list.filter((p) => p.type === cat.type)}
-                />
-              ))}
+              {catalogCategories.map((cat) => {
+                const sectionProducts = list.filter((p) => typesMatch(p.type, cat.type));
+                if (sectionProducts.length === 0) return null;
+                return (
+                  <CategorySection
+                    key={cat.type}
+                    category={cat}
+                    products={sectionProducts}
+                  />
+                );
+              })}
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -317,15 +362,11 @@ function CategorySection({
           Voir tout →
         </Link>
       </div>
-      {items.length === 0 ? (
-        <EmptyCategoryPanel category={category} compact />
-      ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {items.map((p) => (
-            <ProductCard key={p.ref} product={p} showRef />
-          ))}
-        </div>
-      )}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {items.map((p) => (
+          <ProductCard key={p.ref} product={p} showRef />
+        ))}
+      </div>
     </div>
   );
 }

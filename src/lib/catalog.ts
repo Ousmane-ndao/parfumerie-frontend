@@ -54,7 +54,8 @@ export function getCategoryByType(type: ProductType): CatalogCategoryConfig {
 }
 
 export function getProductsByType(all: Product[], type: ProductType): Product[] {
-  return all.filter((p) => p.type === type);
+  const normalized = type.trim().normalize("NFC");
+  return all.filter((p) => String(p.type ?? "").trim().normalize("NFC") === normalized);
 }
 
 export function countProductsByType(all: Product[], type: ProductType): number {

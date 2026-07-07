@@ -49,7 +49,10 @@ type CategoryPageHeaderProps = {
 };
 
 export function CategoryPageHeader({ category, products }: CategoryPageHeaderProps) {
-  const items = products.filter((p) => p.type === category.type);
+  const normalizedType = category.type.trim().normalize("NFC");
+  const items = products.filter(
+    (p) => String(p.type ?? "").trim().normalize("NFC") === normalizedType,
+  );
   const available = items.filter((p) => p.available).length;
   const featured = items.filter((p) => p.featured).length;
   const styles = accentStyles[category.accent];
