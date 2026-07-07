@@ -3,7 +3,7 @@ import { ArrowRight, Star } from "lucide-react";
 import { productDisplayBadge } from "@/lib/catalog";
 import { formatFCFA, type Product } from "@/lib/products";
 import { OrderWhatsAppButton } from "@/components/site/OrderWhatsAppButton";
-import { resolveMediaUrl } from "@/services/api"; // ← IMPORT CORRIGÉ
+import { resolveMediaUrl } from "@/services/api";
 
 type ProductCardProps = {
   product: Product;
@@ -26,7 +26,7 @@ export function ProductCard({ product: p, showRef = false }: ProductCardProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           <div className="absolute top-2 left-2 flex flex-wrap gap-1.5">
             <span className="rounded-full bg-background/95 backdrop-blur px-2 py-0.5 text-[9px] uppercase tracking-wider text-rose-deep font-medium shadow-sm max-w-[85%] truncate">
-              {productDisplayBadge(p)}
+              {p.type || "Produit"}
             </span>
             {p.featured && (
               <span className="inline-flex items-center gap-0.5 rounded-full bg-gold/90 px-2 py-0.5 text-[9px] uppercase tracking-wider text-ink font-medium shadow-sm">
