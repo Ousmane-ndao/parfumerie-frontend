@@ -3,9 +3,9 @@
 import { Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, Package, X, MessageCircle } from "lucide-react";
-import type { Product, ProductType, PerfumeFamily } from "@/lib/products";
-import { perfumeFamilies, countProductsByType } from "@/lib/products";
-import { catalogCategories, type CatalogCategoryConfig } from "@/lib/catalog";
+import type { Product } from "@/lib/products";
+import { countProductsByType } from "@/lib/products";
+import { catalogCategories } from "@/lib/catalog";
 import { ProductCard, SectionHeader } from "@/components/site/ProductCard";
 import { CategoryPageHeader } from "@/components/catalog/CategoryPageHeader";
 import { EmptyCategoryPanel } from "@/components/catalog/EmptyCategoryPanel";
@@ -23,28 +23,23 @@ const sortLabels: Record<SortOption, string> = {
 
 type CatalogViewProps = {
   products: Product[];
-  /** Catégorie fixe (page dédiée) ou undefined pour le catalogue complet */
-  fixedCategory?: CatalogCategoryConfig;
+  fixedCategory?: (typeof catalogCategories)[number];
 };
 
 export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
   const [q, setQ] = useState("");
-  const [productType, setProductType] = useState<ProductType | "Tous">(
-    fixedCategory?.type ?? "Tous",
-  );
-  const [family, setFamily] = useState<PerfumeFamily | "Tous">("Tous");
+  const [productType, setProductType] = useState<string | "Tous">(fixedCategory?.type ?? "Tous");
   const [sort, setSort] = useState<SortOption>("default");
 
   const list = useMemo(() => {
     let result = products.filter((p) => {
       const matchType = productType === "Tous" || p.type === productType;
-      const matchFamily = family === "Tous" || p.family === family;
       const matchQ =
         q.trim() === "" ||
         p.name.toLowerCase().includes(q.toLowerCase()) ||
         p.short.toLowerCase().includes(q.toLowerCase()) ||
         p.ref.toLowerCase().includes(q.toLowerCase());
-      return matchType && matchFamily && matchQ;
+      return matchType && matchQ;
     });
     switch (sort) {
       case "price-asc":
@@ -58,23 +53,18 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
         break;
     }
     return result;
-  }, [products, q, productType, family, sort]);
+  }, [products, q, productType, sort]);
 
   const hasFilters =
-    q.trim() !== "" ||
-    (!fixedCategory && productType !== "Tous") ||
-    family !== "Tous" ||
-    sort !== "default";
+    q.trim() !== "" || (!fixedCategory && productType !== "Tous") || sort !== "default";
 
   function resetFilters() {
     setQ("");
     setProductType(fixedCategory?.type ?? "Tous");
-    setFamily("Tous");
     setSort("default");
   }
 
   const pageTitle = fixedCategory?.label ?? "Notre catalogue";
-
   const isEmptyCategory = fixedCategory && list.length === 0;
 
   return (
@@ -179,35 +169,6 @@ export function CatalogView({ products, fixedCategory }: CatalogViewProps) {
               ))}
             </nav>
           )}
-
-          {(fixedCategory?.type === "Parfum" || productType === "Parfum") && (
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] uppercase tracking-widest text-muted-foreground mr-1">
-                Famille
-              </span>
-              {(["Tous", ...perfumeFamilies] as const).map((f) => {
-                const count =
-                  f === "Tous"
-                    ? countProductsByType(products, "Parfum")
-                    : products.filter((p) => p.type === "Parfum" && p.family === f).length;
-                return (
-                  <button
-                    key={f}
-                    type="button"
-                    onClick={() => setFamily(f)}
-                    className={cn(
-                      "rounded-full border px-2.5 py-1 text-[10px] uppercase tracking-wider",
-                      family === f
-                        ? "border-rose-deep bg-rose/25 text-rose-deep"
-                        : "border-border bg-background hover:border-rose-deep/40",
-                    )}
-                  >
-                    {f} ({count})
-                  </button>
-                );
-              })}
-            </div>
-          )}
         </div>
       </div>
 
@@ -296,7 +257,7 @@ function CategorySection({
   category,
   products: items,
 }: {
-  category: CatalogCategoryConfig;
+  category: (typeof catalogCategories)[number];
   products: Product[];
 }) {
   return (
