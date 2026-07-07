@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { ProductForm, updateProductApi } from "@/components/admin/ProductForm";
+import { normalizeProduct } from "@/lib/product-normalize";
 import { adminFetch } from "@/lib/admin-client";
 import type { ProductWithId } from "@/lib/product-input";
 
@@ -19,8 +20,8 @@ function EditProductPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    adminFetch<ProductWithId>(`/api/admin/products/${id}`)
-      .then(setProduct)
+    adminFetch<Record<string, unknown>>(`/api/admin/products/${id}`)
+      .then((data) => setProduct(normalizeProduct(data) as ProductWithId))
       .catch((e) => setError(e instanceof Error ? e.message : "Erreur"));
   }, [id]);
 

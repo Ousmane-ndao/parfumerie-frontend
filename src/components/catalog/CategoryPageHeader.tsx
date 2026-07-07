@@ -9,6 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Product } from "@/lib/products";
+import { productTypesMatch } from "@/lib/product-normalize";
 import { type CatalogCategoryConfig, type CategoryAccent } from "@/lib/catalog";
 import { whatsappLink } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
@@ -49,10 +50,7 @@ type CategoryPageHeaderProps = {
 };
 
 export function CategoryPageHeader({ category, products }: CategoryPageHeaderProps) {
-  const normalizedType = category.type.trim().normalize("NFC");
-  const items = products.filter(
-    (p) => String(p.type ?? "").trim().normalize("NFC") === normalizedType,
-  );
+  const items = products.filter((p) => productTypesMatch(p.type, category.type));
   const available = items.filter((p) => p.available).length;
   const featured = items.filter((p) => p.featured).length;
   const styles = accentStyles[category.accent];

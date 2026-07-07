@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Plus, Pencil, Trash2, Upload, Loader2 } from "lucide-react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { resolveMediaUrl } from "@/services/api";
+import { normalizeProducts } from "@/lib/product-normalize";
 import { adminFetch } from "@/lib/admin-client";
 import type { ProductWithId } from "@/lib/product-input";
 import { formatFCFA } from "@/lib/products";
@@ -22,8 +23,8 @@ function AdminDashboard() {
   async function load() {
     setLoading(true);
     try {
-      const data = await adminFetch<ProductWithId[]>("/api/admin/products");
-      setProducts(data);
+      const data = await adminFetch<Record<string, unknown>[]>("/api/admin/products");
+      setProducts(normalizeProducts(data) as ProductWithId[]);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Erreur chargement");
     } finally {

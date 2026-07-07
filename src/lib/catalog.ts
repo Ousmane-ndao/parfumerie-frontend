@@ -1,4 +1,5 @@
 import type { PerfumeFamily, Product, ProductType } from "./products";
+import { productTypesMatch } from "./product-normalize";
 
 export type CategoryAccent = "rose" | "emerald" | "gold";
 
@@ -54,8 +55,7 @@ export function getCategoryByType(type: ProductType): CatalogCategoryConfig {
 }
 
 export function getProductsByType(all: Product[], type: ProductType): Product[] {
-  const normalized = type.trim().normalize("NFC");
-  return all.filter((p) => String(p.type ?? "").trim().normalize("NFC") === normalized);
+  return all.filter((p) => productTypesMatch(p.type, type));
 }
 
 export function countProductsByType(all: Product[], type: ProductType): number {
