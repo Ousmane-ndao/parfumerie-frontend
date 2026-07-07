@@ -1,9 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, MessageCircle, Check, X } from "lucide-react";
 import { OrderWhatsAppButton } from "@/components/site/OrderWhatsAppButton";
-import { formatFCFA, isParfum } from "@/lib/products";
+import { formatFCFA, isParfum, type Product } from "@/lib/products";
 import { fetchProduct, fetchProducts } from "@/lib/products-api";
-import { productDisplayBadge } from "@/lib/catalog";
 
 export const Route = createFileRoute("/produit/$ref")({
   loader: async ({ params }) => {
@@ -33,7 +32,7 @@ export const Route = createFileRoute("/produit/$ref")({
             sku: p.ref,
             description: p.description,
             image: p.image,
-            category: productDisplayBadge(p),
+            category: p.type || "Produit",
             offers: {
               "@type": "Offer",
               priceCurrency: "XOF",
@@ -69,7 +68,8 @@ function ProductPage() {
   const parfum = isParfum(p);
   const related = products
     .filter(
-      (x) => x.type === p.type && x.ref !== p.ref && (p.type !== "Parfum" || x.family === p.family),
+      (x: Product) =>
+        x.type === p.type && x.ref !== p.ref && (p.type !== "Parfum" || x.family === p.family),
     )
     .slice(0, 3);
 
@@ -97,7 +97,7 @@ function ProductPage() {
         </div>
         <div>
           <p className="text-xs uppercase tracking-widest text-rose-deep">
-            {productDisplayBadge(p)} · Réf. {p.ref}
+            {p.type || "Produit"} · Réf. {p.ref}
           </p>
           <h1 className="mt-2 font-display text-5xl text-primary">{p.name}</h1>
           <p className="mt-4 text-3xl font-display">{formatFCFA(p.price)}</p>
@@ -166,7 +166,7 @@ function ProductPage() {
         <section className="container-x py-14">
           <h2 className="font-display text-3xl text-primary">Dans le même univers</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((r) => (
+            {related.map((r: Product) => (
               <Link
                 key={r.ref}
                 to="/produit/$ref"
