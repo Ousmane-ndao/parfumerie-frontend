@@ -62,15 +62,15 @@ function Home() {
             </div>
           </div>
 
-          {/* Hero sans cercles : uniquement le logo agrandi */}
-          <div className="relative order-1 lg:order-2 flex items-center justify-center min-h-[280px] md:min-h-[340px]">
-            <div className="relative z-10">
+          <div className="relative order-1 lg:order-2 flex items-center justify-center">
+            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-tr from-rose/30 via-transparent to-emerald-soft/25 blur-2xl" />
+            <div className="relative flex w-full items-center justify-center rounded-2xl border border-border/60 bg-card/90 px-8 py-10 md:px-12 md:py-14 shadow-elegant aspect-[16/11] md:aspect-[4/3]">
               <img
                 src={logo}
                 alt="Salaicha parfumeur"
-                width={700}
-                height={280}
-                className="w-auto h-auto max-h-56 md:max-h-72 object-contain drop-shadow-2xl"
+                width={400}
+                height={160}
+                className="w-full max-w-[260px] md:max-w-[300px] h-auto object-contain"
               />
             </div>
           </div>
